@@ -6,7 +6,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Propostas from "./pages/Propostas";
-import { Lojas, Usuarios, Politicas, Status, Analises, Operacoes, Relatorios, PropostaNova, PropostaDetalhe } from "./pages/PlaceholderPages";
+import { Lojas, Usuarios, Politicas, Status, Analises, Operacoes, Relatorios, PropostaDetalhe } from "./pages/PlaceholderPages";
+import PropostaNova from "./pages/PropostaNova";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
