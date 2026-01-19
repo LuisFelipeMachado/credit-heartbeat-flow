@@ -6,7 +6,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Propostas from "./pages/Propostas";
-import { Lojas, Usuarios, Politicas, Status, Analises, Operacoes, Relatorios, PropostaDetalhe } from "./pages/PlaceholderPages";
+import AnaliseCredito from "./pages/AnaliseCredito";
+import { Lojas, Usuarios, Politicas, Status, Operacoes, Relatorios, PropostaDetalhe } from "./pages/PlaceholderPages";
 import PropostaNova from "./pages/PropostaNova";
 import NotFound from "./pages/NotFound";
 
@@ -29,8 +30,8 @@ const App = () => (
           <Route path="/usuarios" element={<Usuarios />} />
           <Route path="/politicas" element={<Politicas />} />
           <Route path="/status" element={<Status />} />
-          <Route path="/analises" element={<Analises />} />
-          <Route path="/operacoes" element={<Operacoes />} />
+          <Route path="/analises" element={<AnaliseCredito />} />
+          <Route path="/autorizar" element={<Operacoes />} />
           <Route path="/relatorios" element={<Relatorios />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
