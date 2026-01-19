@@ -39,7 +39,7 @@ const mainMenuItems = [
   { title: 'Dashboard', icon: LayoutDashboard, href: '/dashboard' },
   { title: 'Propostas', icon: FileText, href: '/propostas' },
   { title: 'Análise de Crédito', icon: Search, href: '/analises' },
-  { title: 'Operações', icon: Briefcase, href: '/operacoes' },
+  { title: 'Autorizar', icon: Shield, href: '/autorizar' },
   { title: 'Relatórios', icon: BarChart3, href: '/relatorios' },
 ];
 
