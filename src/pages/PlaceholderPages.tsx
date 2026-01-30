@@ -35,4 +35,3 @@ export const Analises = () => <PlaceholderPage title="Análise de Crédito" />;
 export const Operacoes = () => <PlaceholderPage title="Operações" />;
 export const Relatorios = () => <PlaceholderPage title="Relatórios" />;
 export const PropostaNova = () => <PlaceholderPage title="Nova Proposta" />;
-export const PropostaDetalhe = () => <PlaceholderPage title="Detalhes da Proposta" />;
