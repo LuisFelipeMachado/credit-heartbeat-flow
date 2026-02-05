@@ -27,11 +27,6 @@ function PlaceholderPage({ title }: PlaceholderPageProps) {
   );
 }
 
-export const Lojas = () => <PlaceholderPage title="Lojas" />;
-export const Usuarios = () => <PlaceholderPage title="Usuários" />;
-export const Politicas = () => <PlaceholderPage title="Políticas Comerciais" />;
 export const Status = () => <PlaceholderPage title="Status" />;
-export const Analises = () => <PlaceholderPage title="Análise de Crédito" />;
-export const Operacoes = () => <PlaceholderPage title="Operações" />;
+export const Operacoes = () => <PlaceholderPage title="Autorizar" />;
 export const Relatorios = () => <PlaceholderPage title="Relatórios" />;
-export const PropostaNova = () => <PlaceholderPage title="Nova Proposta" />;
