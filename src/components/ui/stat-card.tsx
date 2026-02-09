@@ -42,15 +42,15 @@ export function StatCard({
   return (
     <div
       className={cn(
-        'relative overflow-hidden rounded-xl border p-6 transition-all duration-200 hover:shadow-md',
+        'relative overflow-hidden rounded-xl border p-4 transition-all duration-200 hover:shadow-md',
         variantStyles[variant],
         className
       )}
     >
-      <div className="flex items-start justify-between">
-        <div className="space-y-2">
-          <p className="text-sm font-medium text-muted-foreground">{title}</p>
-          <p className="text-3xl font-bold tracking-tight animate-count-up">{value}</p>
+      <div className="flex items-start justify-between gap-2">
+        <div className="space-y-1.5 min-w-0">
+          <p className="text-xs font-medium text-muted-foreground truncate">{title}</p>
+          <p className="text-xl font-bold tracking-tight animate-count-up truncate">{value}</p>
           {subtitle && (
             <p className="text-xs text-muted-foreground">{subtitle}</p>
           )}
@@ -70,11 +70,11 @@ export function StatCard({
         </div>
         <div
           className={cn(
-            'flex h-12 w-12 items-center justify-center rounded-xl',
+            'flex h-9 w-9 shrink-0 items-center justify-center rounded-lg',
             iconStyles[variant]
           )}
         >
-          <Icon className="h-6 w-6" />
+          <Icon className="h-4 w-4" />
         </div>
       </div>
     </div>
