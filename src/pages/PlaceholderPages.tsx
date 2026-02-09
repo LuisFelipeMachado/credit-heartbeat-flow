@@ -29,4 +29,3 @@ function PlaceholderPage({ title }: PlaceholderPageProps) {
 
 export const Status = () => <PlaceholderPage title="Status" />;
 export const Operacoes = () => <PlaceholderPage title="Autorizar" />;
-export const Relatorios = () => <PlaceholderPage title="Relatórios" />;
