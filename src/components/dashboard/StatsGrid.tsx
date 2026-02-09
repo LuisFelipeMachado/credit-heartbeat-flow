@@ -14,7 +14,7 @@ const formatCurrency = (value: number) =>
 
 export function StatsGrid() {
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+    <div className="grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
       <StatCard
         title="Total Propostas"
         value={mockDashboardStats.totalPropostas}
