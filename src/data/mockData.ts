@@ -2,6 +2,7 @@ import type {
   Usuario, 
   UserRole, 
   Loja, 
+  Filial,
   Proposta, 
   PoliticaComercial, 
   StatusProposta,
@@ -55,7 +56,61 @@ export const mockLojas: Loja[] = [
   },
 ];
 
-// Usuários
+// Filiais
+export const mockFiliais: Filial[] = [
+  {
+    id: 'f1',
+    loja_id: '1',
+    nome: 'Filial Paulista',
+    codigo: 'CTR-01',
+    endereco: 'Av. Paulista, 1000',
+    cidade: 'São Paulo',
+    uf: 'SP',
+    telefone: '(11) 3456-7890',
+    ativo: true,
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'f2',
+    loja_id: '1',
+    nome: 'Filial Augusta',
+    codigo: 'CTR-02',
+    endereco: 'Rua Augusta, 500',
+    cidade: 'São Paulo',
+    uf: 'SP',
+    telefone: '(11) 3456-7893',
+    ativo: true,
+    created_at: '2024-01-10T00:00:00Z',
+    updated_at: '2024-01-10T00:00:00Z',
+  },
+  {
+    id: 'f3',
+    loja_id: '2',
+    nome: 'Filial Pinheiros Centro',
+    codigo: 'PIN-01',
+    endereco: 'Rua dos Pinheiros, 500',
+    cidade: 'São Paulo',
+    uf: 'SP',
+    telefone: '(11) 3456-7891',
+    ativo: true,
+    created_at: '2024-01-15T00:00:00Z',
+    updated_at: '2024-01-15T00:00:00Z',
+  },
+  {
+    id: 'f4',
+    loja_id: '3',
+    nome: 'Filial Campinas Norte',
+    codigo: 'CPS-01',
+    endereco: 'Av. Norte Sul, 200',
+    cidade: 'Campinas',
+    uf: 'SP',
+    telefone: '(19) 3456-7892',
+    ativo: false,
+    created_at: '2024-02-01T00:00:00Z',
+    updated_at: '2024-02-01T00:00:00Z',
+  },
+];
 export const mockUsuarios: Usuario[] = [
   {
     id: '1',
@@ -70,6 +125,7 @@ export const mockUsuarios: Usuario[] = [
     nome: 'Maria Silva',
     email: 'maria.silva@idealbanking.com',
     loja_id: '1',
+    filial_id: 'f1',
     ativo: true,
     created_at: '2024-01-10T00:00:00Z',
     updated_at: '2024-01-10T00:00:00Z',
@@ -79,6 +135,7 @@ export const mockUsuarios: Usuario[] = [
     nome: 'João Santos',
     email: 'joao.santos@idealbanking.com',
     loja_id: '1',
+    filial_id: 'f2',
     ativo: true,
     created_at: '2024-01-15T00:00:00Z',
     updated_at: '2024-01-15T00:00:00Z',
@@ -88,6 +145,7 @@ export const mockUsuarios: Usuario[] = [
     nome: 'Ana Oliveira',
     email: 'ana.oliveira@idealbanking.com',
     loja_id: '2',
+    filial_id: 'f3',
     ativo: true,
     created_at: '2024-02-01T00:00:00Z',
     updated_at: '2024-02-01T00:00:00Z',
@@ -384,6 +442,8 @@ export const mockDashboardStats: DashboardStats = {
 
 // Helper functions
 export const getLojaById = (id: string) => mockLojas.find(l => l.id === id);
+export const getFilialById = (id: string) => mockFiliais.find(f => f.id === id);
+export const getFiliaisByLojaId = (lojaId: string) => mockFiliais.filter(f => f.loja_id === lojaId);
 export const getUsuarioById = (id: string) => mockUsuarios.find(u => u.id === id);
 export const getPoliticaById = (id: string) => mockPoliticas.find(p => p.id === id);
 export const getUserRoleByUserId = (userId: string) => mockUserRoles.find(r => r.user_id === userId);
