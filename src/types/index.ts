@@ -51,6 +51,7 @@ export interface Usuario {
   nome: string;
   email: string;
   loja_id?: string;
+  filial_id?: string;
   ativo: boolean;
   created_at: string;
   updated_at: string;
@@ -73,6 +74,21 @@ export interface Loja {
   endereco?: string;
   cidade?: string;
   uf?: string;
+  ativo: boolean;
+  created_at: string;
+  updated_at: string;
+  filiais?: Filial[];
+}
+
+export interface Filial {
+  id: string;
+  loja_id: string;
+  nome: string;
+  codigo: string;
+  endereco?: string;
+  cidade?: string;
+  uf?: string;
+  telefone?: string;
   ativo: boolean;
   created_at: string;
   updated_at: string;

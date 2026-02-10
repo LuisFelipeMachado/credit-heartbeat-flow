@@ -31,14 +31,15 @@ import {
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Plus, Pencil, Users, Search } from 'lucide-react';
-import { mockUsuarios, mockLojas, mockUserRoles } from '@/data/mockData';
-import type { Usuario, AppRole } from '@/types';
+import { mockUsuarios, mockLojas, mockUserRoles, mockFiliais } from '@/data/mockData';
+import type { Usuario, AppRole, Filial } from '@/types';
 
 interface UsuarioFormData {
   nome: string;
   email: string;
   role: AppRole;
   loja_id: string;
+  filial_id: string;
   ativo: boolean;
 }
 
@@ -47,6 +48,7 @@ const emptyFormData: UsuarioFormData = {
   email: '',
   role: 'OPERADOR_LOJA',
   loja_id: '',
+  filial_id: '',
   ativo: true,
 };
 
@@ -79,6 +81,15 @@ export default function UsuariosPage() {
     return loja?.nome_fantasia || '-';
   };
 
+  const getFilialName = (filialId?: string) => {
+    if (!filialId) return '-';
+    const filial = mockFiliais.find((f) => f.id === filialId);
+    return filial?.nome || '-';
+  };
+
+  const getFiliaisByLoja = (lojaId: string): Filial[] =>
+    mockFiliais.filter((f) => f.loja_id === lojaId && f.ativo);
+
   const getUserRole = (userId: string): AppRole | undefined => {
     const role = userRoles.find((r) => r.user_id === userId);
     return role?.role;
@@ -98,6 +109,7 @@ export default function UsuariosPage() {
       email: usuario.email,
       role: role || 'OPERADOR_LOJA',
       loja_id: usuario.loja_id || '',
+      filial_id: usuario.filial_id || '',
       ativo: usuario.ativo,
     });
     setDialogOpen(true);
@@ -113,6 +125,7 @@ export default function UsuariosPage() {
                 nome: formData.nome,
                 email: formData.email,
                 loja_id: formData.loja_id || undefined,
+                filial_id: formData.filial_id || undefined,
                 ativo: formData.ativo,
                 updated_at: new Date().toISOString(),
               }
@@ -133,6 +146,7 @@ export default function UsuariosPage() {
         nome: formData.nome,
         email: formData.email,
         loja_id: formData.loja_id || undefined,
+        filial_id: formData.filial_id || undefined,
         ativo: formData.ativo,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
@@ -225,11 +239,11 @@ export default function UsuariosPage() {
                   <Select
                     value={formData.loja_id}
                     onValueChange={(value) =>
-                      setFormData({ ...formData, loja_id: value })
+                      setFormData({ ...formData, loja_id: value, filial_id: '' })
                     }
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Selecione a loja (opcional)" />
+                      <SelectValue placeholder="Selecione a loja" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="">Nenhuma</SelectItem>
@@ -243,6 +257,29 @@ export default function UsuariosPage() {
                     </SelectContent>
                   </Select>
                 </div>
+
+                {formData.loja_id && (
+                  <div className="space-y-2">
+                    <Label htmlFor="filial">Filial *</Label>
+                    <Select
+                      value={formData.filial_id}
+                      onValueChange={(value) =>
+                        setFormData({ ...formData, filial_id: value })
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecione a filial" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {getFiliaisByLoja(formData.loja_id).map((filial) => (
+                          <SelectItem key={filial.id} value={filial.id}>
+                            {filial.nome} ({filial.codigo})
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
 
                 <div className="flex items-center space-x-2">
                   <Switch
@@ -292,6 +329,7 @@ export default function UsuariosPage() {
                   <TableHead>E-mail</TableHead>
                   <TableHead>Perfil</TableHead>
                   <TableHead>Loja</TableHead>
+                  <TableHead>Filial</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead className="text-right">Ações</TableHead>
                 </TableRow>
@@ -309,6 +347,7 @@ export default function UsuariosPage() {
                         {role ? roleLabels[role] : '-'}
                       </TableCell>
                       <TableCell>{getLojaName(usuario.loja_id)}</TableCell>
+                      <TableCell>{getFilialName(usuario.filial_id)}</TableCell>
                       <TableCell>
                         <Badge variant={usuario.ativo ? 'default' : 'secondary'}>
                           {usuario.ativo ? 'Ativo' : 'Inativo'}
@@ -329,7 +368,7 @@ export default function UsuariosPage() {
                 {filteredUsuarios.length === 0 && (
                   <TableRow>
                     <TableCell
-                      colSpan={6}
+                      colSpan={8}
                       className="text-center text-muted-foreground py-8"
                     >
                       Nenhum usuário encontrado
