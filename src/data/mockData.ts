@@ -265,7 +265,7 @@ export const mockPropostas: Proposta[] = [
     carencia_meses: 2,
     margem_consignavel: 35,
     taxa_aplicada: 1.99,
-    status: 'APROVADA',
+    status: 'AVERBADA',
     loja_id: '1',
     usuario_id: '2',
     politica_id: '1',
@@ -340,7 +340,7 @@ export const mockPropostas: Proposta[] = [
     carencia_meses: 2,
     margem_consignavel: 35,
     taxa_aplicada: 1.99,
-    status: 'PENDENTE_DOC',
+    status: 'AGUARDANDO_ASSINATURA',
     loja_id: '1',
     usuario_id: '2',
     politica_id: '1',
@@ -364,13 +364,14 @@ export const mockPropostas: Proposta[] = [
     carencia_meses: 3,
     margem_consignavel: 40,
     taxa_aplicada: 1.49,
-    status: 'ENVIADA',
+    status: 'AVERBADA',
     loja_id: '2',
     usuario_id: '4',
     politica_id: '2',
     created_at: '2024-03-20T08:00:00Z',
     updated_at: '2024-03-20T08:00:00Z',
     submitted_at: '2024-03-20T09:00:00Z',
+    decided_at: '2024-03-22T10:00:00Z',
   },
   {
     id: '6',
@@ -385,6 +386,97 @@ export const mockPropostas: Proposta[] = [
     usuario_id: '3',
     created_at: '2024-03-22T10:00:00Z',
     updated_at: '2024-03-22T10:00:00Z',
+  },
+  {
+    id: '7',
+    cliente_nome: 'Lucas Mendes',
+    cliente_cpf: '111.222.333-44',
+    cliente_telefone: '(11) 93333-1111',
+    cliente_email: 'lucas.mendes@email.com',
+    cliente_data_nasc: '1988-09-20',
+    empresa_nome: 'Logística Express LTDA',
+    empresa_cnpj: '22.333.444/0001-55',
+    tempo_carteira_meses: 72,
+    salario_base: 7800,
+    valor_solicitado: 45000,
+    prazo_meses: 60,
+    taxa_aplicada: 1.99,
+    status: 'APROVADA',
+    loja_id: '1',
+    usuario_id: '2',
+    politica_id: '1',
+    created_at: '2024-03-25T09:00:00Z',
+    updated_at: '2024-03-28T11:00:00Z',
+    submitted_at: '2024-03-25T10:00:00Z',
+    decided_at: '2024-03-28T11:00:00Z',
+  },
+  {
+    id: '8',
+    cliente_nome: 'Patrícia Rocha',
+    cliente_cpf: '555.666.777-88',
+    cliente_telefone: '(19) 92222-4444',
+    cliente_email: 'patricia.rocha@email.com',
+    cliente_data_nasc: '1992-04-10',
+    empresa_nome: 'Educação Prime S/A',
+    empresa_cnpj: '66.777.888/0001-99',
+    tempo_carteira_meses: 18,
+    salario_base: 4200,
+    valor_solicitado: 12000,
+    prazo_meses: 36,
+    taxa_aplicada: 2.49,
+    status: 'PENDENTE_DOC',
+    loja_id: '2',
+    usuario_id: '4',
+    politica_id: '3',
+    created_at: '2024-03-26T14:00:00Z',
+    updated_at: '2024-03-27T09:00:00Z',
+    submitted_at: '2024-03-26T15:00:00Z',
+  },
+  {
+    id: '9',
+    cliente_nome: 'Ricardo Almeida',
+    cliente_cpf: '999.888.777-66',
+    cliente_telefone: '(11) 91111-5555',
+    cliente_email: 'ricardo.almeida@email.com',
+    cliente_data_nasc: '1980-12-05',
+    empresa_nome: 'Construtora Delta LTDA',
+    empresa_cnpj: '88.999.000/0001-11',
+    tempo_carteira_meses: 96,
+    salario_base: 9500,
+    valor_solicitado: 70000,
+    prazo_meses: 72,
+    taxa_aplicada: 1.49,
+    status: 'AGUARDANDO_ASSINATURA',
+    loja_id: '1',
+    usuario_id: '3',
+    politica_id: '2',
+    created_at: '2024-03-27T08:00:00Z',
+    updated_at: '2024-03-29T10:00:00Z',
+    submitted_at: '2024-03-27T09:00:00Z',
+  },
+  {
+    id: '10',
+    cliente_nome: 'Camila Souza',
+    cliente_cpf: '444.555.666-77',
+    cliente_telefone: '(11) 90000-6666',
+    cliente_email: 'camila.souza@email.com',
+    cliente_data_nasc: '1995-06-18',
+    empresa_nome: 'Startup Nova Era',
+    empresa_cnpj: '11.000.222/0001-33',
+    tempo_carteira_meses: 12,
+    salario_base: 3800,
+    valor_solicitado: 10000,
+    prazo_meses: 24,
+    taxa_aplicada: 2.49,
+    status: 'REPROVADA',
+    motivo_reprovacao: 'Score interno abaixo do mínimo exigido',
+    loja_id: '2',
+    usuario_id: '4',
+    politica_id: '3',
+    created_at: '2024-03-28T11:00:00Z',
+    updated_at: '2024-03-30T14:00:00Z',
+    submitted_at: '2024-03-28T12:00:00Z',
+    decided_at: '2024-03-30T14:00:00Z',
   },
 ];
 
@@ -430,7 +522,34 @@ export const mockOperacoes: Operacao[] = [
   },
 ];
 
-// Dashboard Stats
+// Dashboard Stats (computed from mockPropostas)
+export const getDashboardStats = () => {
+  const total = mockPropostas.length;
+  const averbadas = mockPropostas.filter(p => p.status === 'AVERBADA').length;
+  const aguardandoAssinatura = mockPropostas.filter(p => p.status === 'AGUARDANDO_ASSINATURA').length;
+  const emAnalise = mockPropostas.filter(p => p.status === 'EM_ANALISE').length;
+  const aprovadas = mockPropostas.filter(p => p.status === 'APROVADA').length;
+  const reprovadas = mockPropostas.filter(p => p.status === 'REPROVADA').length;
+  const pendenteDoc = mockPropostas.filter(p => p.status === 'PENDENTE_DOC').length;
+  const valorAcumulado = mockPropostas
+    .filter(p => ['AVERBADA', 'APROVADA', 'AGUARDANDO_ASSINATURA'].includes(p.status))
+    .reduce((sum, p) => sum + p.valor_solicitado, 0);
+  const taxaAprovacao = total > 0 ? ((averbadas + aprovadas) / (total - mockPropostas.filter(p => p.status === 'RASCUNHO').length)) * 100 : 0;
+
+  return {
+    totalPropostas: total,
+    averbadas,
+    aguardandoAssinatura,
+    emAnalise,
+    aprovadas,
+    reprovadas,
+    pendenteDoc,
+    valorAcumulado,
+    taxaAprovacao: Math.round(taxaAprovacao * 10) / 10,
+  };
+};
+
+// Keep backward compat
 export const mockDashboardStats: DashboardStats = {
   totalPropostas: 156,
   emAnalise: 23,

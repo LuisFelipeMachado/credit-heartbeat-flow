@@ -16,7 +16,9 @@ export type PropostaStatus =
   | 'APROVADA' 
   | 'REPROVADA' 
   | 'CANCELADA' 
-  | 'LIQUIDADA';
+  | 'LIQUIDADA'
+  | 'AVERBADA'
+  | 'AGUARDANDO_ASSINATURA';
 
 export type OperacaoStatus = 
   | 'ATIVA' 

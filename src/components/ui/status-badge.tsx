@@ -15,6 +15,8 @@ const statusConfig: Record<PropostaStatus, { label: string; className: string }>
   REPROVADA: { label: 'Reprovada', className: 'bg-destructive/10 text-destructive border border-destructive/20' },
   CANCELADA: { label: 'Cancelada', className: 'bg-muted text-muted-foreground' },
   LIQUIDADA: { label: 'Liquidada', className: 'bg-primary/10 text-primary border border-primary/20' },
+  AVERBADA: { label: 'Averbada', className: 'bg-success/10 text-success border border-success/20' },
+  AGUARDANDO_ASSINATURA: { label: 'Aguard. Assinatura', className: 'bg-info/10 text-info border border-info/20' },
 };
 
 export function StatusBadge({ status, className }: StatusBadgeProps) {
