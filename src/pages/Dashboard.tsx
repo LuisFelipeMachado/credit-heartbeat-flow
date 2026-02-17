@@ -37,7 +37,7 @@ export default function Dashboard() {
             <MetricCard
               title="Valor Acumulado"
               value={formatCurrency(stats.valorAcumulado)}
-              subtitle="Propostas aprovadas + averbadas"
+              subtitle="Propostas averbadas"
               icon={Wallet}
               iconColor="text-emerald-600"
             />
