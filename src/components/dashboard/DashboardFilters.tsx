@@ -32,15 +32,6 @@ export function DashboardFilters() {
         </SelectContent>
       </Select>
 
-      <Select defaultValue="brl">
-        <SelectTrigger className="w-[180px] bg-white shadow-sm border-border/40">
-          <SelectValue placeholder="Moeda" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="brl">Todas as moedas</SelectItem>
-          <SelectItem value="usd">USD</SelectItem>
-        </SelectContent>
-      </Select>
     </div>
   );
 }
