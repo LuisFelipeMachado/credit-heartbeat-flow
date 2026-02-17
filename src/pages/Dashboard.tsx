@@ -55,7 +55,7 @@ export default function Dashboard() {
           <MetricCard
             title="Averbadas"
             value={stats.averbadas}
-            subtitle="Contratos registrados no RH"
+            
             icon={CheckCircle}
             iconColor="text-emerald-600"
           />
