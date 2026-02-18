@@ -5,7 +5,7 @@ import { StatusBadge } from '@/components/ui/status-badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Plus, Search, Eye } from 'lucide-react';
+import { Plus, Search, Eye, Pencil, RefreshCw } from 'lucide-react';
 import { getEnrichedPropostas } from '@/data/mockData';
 
 export default function Propostas() {
@@ -49,7 +49,7 @@ export default function Propostas() {
                 <TableHead>Loja</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Data</TableHead>
-                <TableHead className="w-12"></TableHead>
+                <TableHead className="text-right">Ações</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -62,7 +62,23 @@ export default function Propostas() {
                   <TableCell>{p.loja?.nome_fantasia || '-'}</TableCell>
                   <TableCell><StatusBadge status={p.status} /></TableCell>
                   <TableCell>{formatDate(p.created_at)}</TableCell>
-                  <TableCell><Button variant="ghost" size="icon" asChild><Link to={`/propostas/${p.id}`}><Eye className="h-4 w-4" /></Link></Button></TableCell>
+                  <TableCell>
+                    <div className="flex items-center justify-end gap-1">
+                      <Button variant="ghost" size="icon" asChild>
+                        <Link to={`/propostas/${p.id}`}><Eye className="h-4 w-4" /></Link>
+                      </Button>
+                      {p.status !== 'AVERBADA' && (
+                        <Button variant="ghost" size="icon" asChild>
+                          <Link to={`/propostas/${p.id}`}><Pencil className="h-4 w-4" /></Link>
+                        </Button>
+                      )}
+                      {p.status !== 'AVERBADA' && (
+                        <Button variant="ghost" size="icon">
+                          <RefreshCw className="h-4 w-4" />
+                        </Button>
+                      )}
+                    </div>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
