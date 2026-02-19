@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { User, Phone, Mail, Calendar } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
+import { User, Phone, Mail, Calendar, MapPin, Store, UserCheck } from 'lucide-react';
+import { DataField } from './DataField';
 import type { Proposta } from '@/types';
 
 interface DadosEssenciaisTabProps {
@@ -15,73 +15,57 @@ export function DadosEssenciaisTab({ proposta }: DadosEssenciaisTabProps) {
   };
 
   return (
-    <div className="space-y-6 pt-6">
-      <Card>
-        <CardHeader>
+    <div className="space-y-4 pt-4">
+      <Card className="rounded-xl">
+        <CardHeader className="pb-4">
           <div className="flex items-center gap-2">
-            <User className="h-5 w-5 text-accent" />
-            <CardTitle>Dados do Cliente</CardTitle>
+            <div className="h-8 w-8 rounded-lg bg-accent/10 flex items-center justify-center">
+              <User className="h-4 w-4 text-accent" />
+            </div>
+            <CardTitle className="text-lg">Dados do Cliente</CardTitle>
           </div>
         </CardHeader>
-        <CardContent className="grid gap-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label className="flex items-center gap-2">
-                <User className="h-4 w-4 text-muted-foreground" />
-                Nome Completo
-              </Label>
-              <Input value={proposta.cliente_nome} disabled className="bg-muted" />
-            </div>
-            <div className="space-y-2">
-              <Label>CPF</Label>
-              <Input value={proposta.cliente_cpf} disabled className="bg-muted" />
-            </div>
+        <CardContent className="space-y-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+            <DataField label="Nome Completo" value={proposta.cliente_nome} icon={User} />
+            <DataField label="CPF" value={proposta.cliente_cpf} />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="space-y-2">
-              <Label className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-muted-foreground" />
-                Telefone
-              </Label>
-              <Input value={proposta.cliente_telefone || '-'} disabled className="bg-muted" />
-            </div>
-            <div className="space-y-2">
-              <Label className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-muted-foreground" />
-                E-mail
-              </Label>
-              <Input value={proposta.cliente_email || '-'} disabled className="bg-muted" />
-            </div>
-            <div className="space-y-2">
-              <Label className="flex items-center gap-2">
-                <Calendar className="h-4 w-4 text-muted-foreground" />
-                Data de Nascimento
-              </Label>
-              <Input value={formatDate(proposta.cliente_data_nasc)} disabled className="bg-muted" />
-            </div>
+          <Separator />
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-4">
+            <DataField label="Telefone" value={proposta.cliente_telefone} icon={Phone} />
+            <DataField label="E-mail" value={proposta.cliente_email} icon={Mail} />
+            <DataField label="Data de Nascimento" value={formatDate(proposta.cliente_data_nasc)} icon={Calendar} />
           </div>
+
+          {(proposta.cliente_endereco || proposta.cliente_cidade) && (
+            <>
+              <Separator />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-4">
+                <DataField label="Endereço" value={proposta.cliente_endereco} icon={MapPin} className="sm:col-span-2" />
+                <DataField label="Cidade" value={proposta.cliente_cidade} />
+                <DataField label="UF" value={proposta.cliente_estado} />
+              </div>
+            </>
+          )}
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Informações da Proposta</CardTitle>
+      <Card className="rounded-xl">
+        <CardHeader className="pb-4">
+          <div className="flex items-center gap-2">
+            <div className="h-8 w-8 rounded-lg bg-accent/10 flex items-center justify-center">
+              <Store className="h-4 w-4 text-accent" />
+            </div>
+            <CardTitle className="text-lg">Informações da Proposta</CardTitle>
+          </div>
         </CardHeader>
-        <CardContent className="grid gap-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="space-y-2">
-              <Label>Loja</Label>
-              <Input value={proposta.loja?.nome_fantasia || '-'} disabled className="bg-muted" />
-            </div>
-            <div className="space-y-2">
-              <Label>Operador</Label>
-              <Input value={proposta.usuario?.nome || '-'} disabled className="bg-muted" />
-            </div>
-            <div className="space-y-2">
-              <Label>Criada em</Label>
-              <Input value={formatDate(proposta.created_at)} disabled className="bg-muted" />
-            </div>
+        <CardContent>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-4">
+            <DataField label="Loja" value={proposta.loja?.nome_fantasia} icon={Store} />
+            <DataField label="Operador" value={proposta.usuario?.nome} icon={UserCheck} />
+            <DataField label="Criada em" value={formatDate(proposta.created_at)} icon={Calendar} />
           </div>
         </CardContent>
       </Card>

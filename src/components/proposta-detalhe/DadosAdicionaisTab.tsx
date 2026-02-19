@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { UserCircle, AlertCircle } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
+import { UserCircle, AlertCircle, Calendar, Briefcase, Heart } from 'lucide-react';
+import { DataField } from './DataField';
 import type { Proposta } from '@/types';
 
 interface DadosAdicionaisTabProps {
@@ -23,84 +23,63 @@ export function DadosAdicionaisTab({ proposta }: DadosAdicionaisTabProps) {
 
   const age = calculateAge(proposta.cliente_data_nasc);
 
-  // Note: These fields might not be in the Proposta type yet
-  // They're shown as placeholders for when the data is available
-  const dadosAdicionais = {
-    genero: '-',
-    estadoCivil: '-',
-    escolaridade: '-',
-    profissao: '-',
-    renda: '-'
+  const formatDate = (date?: string) => {
+    if (!date) return '-';
+    return new Date(date).toLocaleDateString('pt-BR');
   };
 
   return (
-    <div className="space-y-6 pt-6">
-      <Card>
-        <CardHeader>
+    <div className="space-y-4 pt-4">
+      <Card className="rounded-xl">
+        <CardHeader className="pb-4">
           <div className="flex items-center gap-2">
-            <UserCircle className="h-5 w-5 text-accent" />
-            <CardTitle>Informações Pessoais</CardTitle>
+            <div className="h-8 w-8 rounded-lg bg-accent/10 flex items-center justify-center">
+              <UserCircle className="h-4 w-4 text-accent" />
+            </div>
+            <div>
+              <CardTitle className="text-lg">Informações Pessoais</CardTitle>
+              <CardDescription>Dados complementares do cliente</CardDescription>
+            </div>
           </div>
-          <CardDescription>
-            Dados complementares do cliente
-          </CardDescription>
         </CardHeader>
-        <CardContent className="grid gap-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="space-y-2">
-              <Label>Gênero</Label>
-              <Input value={dadosAdicionais.genero} disabled className="bg-muted" />
-            </div>
-            <div className="space-y-2">
-              <Label>Data de Nascimento</Label>
-              <Input 
-                value={proposta.cliente_data_nasc 
-                  ? new Date(proposta.cliente_data_nasc).toLocaleDateString('pt-BR') 
-                  : '-'} 
-                disabled 
-                className="bg-muted" 
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Idade</Label>
-              <Input value={age !== null ? `${age} anos` : '-'} disabled className="bg-muted" />
-            </div>
+        <CardContent className="space-y-5">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-4">
+            <DataField label="Gênero" value={proposta.cliente_genero || '-'} icon={UserCircle} />
+            <DataField label="Data de Nascimento" value={formatDate(proposta.cliente_data_nasc)} icon={Calendar} />
+            <DataField label="Idade" value={age !== null ? `${age} anos` : '-'} />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label>Estado Civil</Label>
-              <Input value={dadosAdicionais.estadoCivil} disabled className="bg-muted" />
-            </div>
-            <div className="space-y-2">
-              <Label>Escolaridade</Label>
-              <Input value={dadosAdicionais.escolaridade} disabled className="bg-muted" />
-            </div>
+          <Separator />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+            <DataField label="Estado Civil" value={proposta.cliente_estado_civil || '-'} icon={Heart} />
+            <DataField label="Nome da Mãe" value={proposta.cliente_nome_mae} />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label>Profissão</Label>
-              <Input value={dadosAdicionais.profissao} disabled className="bg-muted" />
-            </div>
-            <div className="space-y-2">
-              <Label>Renda Mensal</Label>
-              <Input value={dadosAdicionais.renda} disabled className="bg-muted" />
-            </div>
-          </div>
+          {proposta.observacoes && (
+            <>
+              <Separator />
+              <div className="space-y-1.5">
+                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Observações</p>
+                <p className="text-sm text-foreground bg-muted/50 p-3 rounded-lg">{proposta.observacoes}</p>
+              </div>
+            </>
+          )}
         </CardContent>
       </Card>
 
       {proposta.motivo_reprovacao && (
-        <Card className="border-destructive">
-          <CardHeader>
+        <Card className="rounded-xl border-destructive/50">
+          <CardHeader className="pb-4">
             <div className="flex items-center gap-2">
-              <AlertCircle className="h-5 w-5 text-destructive" />
-              <CardTitle className="text-destructive">Motivo da Reprovação</CardTitle>
+              <div className="h-8 w-8 rounded-lg bg-destructive/10 flex items-center justify-center">
+                <AlertCircle className="h-4 w-4 text-destructive" />
+              </div>
+              <CardTitle className="text-lg text-destructive">Motivo da Reprovação</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
-            <p className="text-muted-foreground">{proposta.motivo_reprovacao}</p>
+            <p className="text-sm text-muted-foreground bg-destructive/5 p-3 rounded-lg">{proposta.motivo_reprovacao}</p>
           </CardContent>
         </Card>
       )}

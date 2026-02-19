@@ -1,9 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Calculator, TrendingUp, Percent } from 'lucide-react';
+import { Calculator, TrendingUp, Percent, Clock, Landmark } from 'lucide-react';
+import { DataField } from './DataField';
 import type { Proposta } from '@/types';
 
 interface SimulacaoTabProps {
@@ -16,135 +14,87 @@ export function SimulacaoTab({ proposta }: SimulacaoTabProps) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
   };
 
-  // Cálculo da simulação
   const calcularParcela = () => {
-    if (!proposta.valor_solicitado || !proposta.prazo_meses || !proposta.taxa_aplicada) {
-      return null;
-    }
+    if (!proposta.valor_solicitado || !proposta.prazo_meses || !proposta.taxa_aplicada) return null;
 
     const valor = proposta.valor_solicitado;
     const meses = proposta.prazo_meses;
     const taxaMensal = proposta.taxa_aplicada / 100;
 
-    // Cálculo Price
     const parcela = valor * (taxaMensal * Math.pow(1 + taxaMensal, meses)) / (Math.pow(1 + taxaMensal, meses) - 1);
     const totalPagar = parcela * meses;
     const jurosTotal = totalPagar - valor;
     const taxaAnual = (Math.pow(1 + taxaMensal, 12) - 1) * 100;
     const cet = ((totalPagar / valor - 1) / meses * 12) * 100;
 
-    return {
-      parcela,
-      totalPagar,
-      jurosTotal,
-      taxaAnual,
-      cet
-    };
+    return { parcela, totalPagar, jurosTotal, taxaAnual, cet };
   };
 
   const simulacao = calcularParcela();
 
   return (
-    <div className="space-y-6 pt-6">
-      <Card>
-        <CardHeader>
+    <div className="space-y-4 pt-4">
+      <Card className="rounded-xl">
+        <CardHeader className="pb-4">
           <div className="flex items-center gap-2">
-            <Calculator className="h-5 w-5 text-accent" />
-            <CardTitle>Valores Solicitados</CardTitle>
+            <div className="h-8 w-8 rounded-lg bg-accent/10 flex items-center justify-center">
+              <Calculator className="h-4 w-4 text-accent" />
+            </div>
+            <div>
+              <CardTitle className="text-lg">Valores Solicitados</CardTitle>
+              <CardDescription>Dados da simulação do empréstimo</CardDescription>
+            </div>
           </div>
-          <CardDescription>
-            Dados da simulação do empréstimo
-          </CardDescription>
         </CardHeader>
-        <CardContent className="grid gap-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="space-y-2">
-              <Label>Valor Solicitado</Label>
-              <Input 
-                value={formatCurrency(proposta.valor_solicitado)} 
-                disabled 
-                className="bg-muted text-lg font-semibold" 
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Prazo</Label>
-              <Input 
-                value={proposta.prazo_meses ? `${proposta.prazo_meses} meses` : '-'} 
-                disabled 
-                className="bg-muted" 
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Carência</Label>
-              <Input 
-                value={proposta.carencia_meses ? `${proposta.carencia_meses} meses` : '-'} 
-                disabled 
-                className="bg-muted" 
-              />
-            </div>
+        <CardContent className="space-y-5">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-4">
+            <DataField label="Valor Solicitado" value={formatCurrency(proposta.valor_solicitado)} highlight />
+            <DataField label="Prazo" value={proposta.prazo_meses} suffix=" meses" icon={Clock} />
+            <DataField label="Carência" value={proposta.carencia_meses} suffix=" meses" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label className="flex items-center gap-2">
-                <Percent className="h-4 w-4 text-muted-foreground" />
-                Taxa Mensal
-              </Label>
-              <Input 
-                value={proposta.taxa_aplicada ? `${proposta.taxa_aplicada}% a.m.` : '-'} 
-                disabled 
-                className="bg-muted" 
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Política Comercial</Label>
-              <Input 
-                value={proposta.politica?.nome || '-'} 
-                disabled 
-                className="bg-muted" 
-              />
-            </div>
+          <Separator />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+            <DataField label="Taxa Mensal" value={proposta.taxa_aplicada} suffix="% a.m." icon={Percent} />
+            <DataField label="Política Comercial" value={proposta.politica?.nome} icon={Landmark} />
           </div>
         </CardContent>
       </Card>
 
       {simulacao && (
-        <Card>
-          <CardHeader>
+        <Card className="rounded-xl">
+          <CardHeader className="pb-4">
             <div className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-accent" />
-              <CardTitle>Resultado da Simulação</CardTitle>
+              <div className="h-8 w-8 rounded-lg bg-accent/10 flex items-center justify-center">
+                <TrendingUp className="h-4 w-4 text-accent" />
+              </div>
+              <CardTitle className="text-lg">Resultado da Simulação</CardTitle>
             </div>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="p-4 bg-accent/10 rounded-lg">
-              <div className="flex items-center justify-between">
-                <span className="text-muted-foreground">Valor da Parcela</span>
-                <Badge variant="secondary" className="text-xl font-bold py-2 px-4 bg-accent text-accent-foreground">
-                  {formatCurrency(simulacao.parcela)}
-                </Badge>
+          <CardContent className="space-y-5">
+            {/* Parcela Highlight */}
+            <div className="flex items-center justify-between p-5 rounded-xl border-2 border-accent/30 bg-accent/5">
+              <div>
+                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Valor da Parcela</p>
+                <p className="text-xs text-muted-foreground mt-0.5">{proposta.prazo_meses}x parcelas fixas</p>
               </div>
+              <span className="text-2xl font-bold text-accent">{formatCurrency(simulacao.parcela)}</span>
             </div>
 
-            <Separator />
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="p-3 bg-muted/50 rounded-lg text-center">
-                <p className="text-xs text-muted-foreground mb-1">Taxa Anual</p>
-                <p className="font-semibold">{simulacao.taxaAnual.toFixed(2)}%</p>
-              </div>
-              <div className="p-3 bg-muted/50 rounded-lg text-center">
-                <p className="text-xs text-muted-foreground mb-1">CET Anual</p>
-                <p className="font-semibold">{simulacao.cet.toFixed(2)}%</p>
-              </div>
-              <div className="p-3 bg-muted/50 rounded-lg text-center">
-                <p className="text-xs text-muted-foreground mb-1">Total de Juros</p>
-                <p className="font-semibold">{formatCurrency(simulacao.jurosTotal)}</p>
-              </div>
-              <div className="p-3 bg-muted/50 rounded-lg text-center">
-                <p className="text-xs text-muted-foreground mb-1">Total a Pagar</p>
-                <p className="font-semibold">{formatCurrency(simulacao.totalPagar)}</p>
-              </div>
+            {/* Grid metrics */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {[
+                { label: 'Taxa Anual', value: `${simulacao.taxaAnual.toFixed(2)}%` },
+                { label: 'CET Anual', value: `${simulacao.cet.toFixed(2)}%` },
+                { label: 'Total de Juros', value: formatCurrency(simulacao.jurosTotal) },
+                { label: 'Total a Pagar', value: formatCurrency(simulacao.totalPagar) },
+              ].map((item) => (
+                <div key={item.label} className="p-3 bg-muted/50 rounded-xl text-center space-y-1">
+                  <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">{item.label}</p>
+                  <p className="text-sm font-semibold">{item.value}</p>
+                </div>
+              ))}
             </div>
           </CardContent>
         </Card>
