@@ -45,7 +45,7 @@ const mainMenuItems = [
 ];
 
 const configMenuItems = [
-  { title: 'Lojas', icon: Store, href: '/lojas' },
+  { title: 'Clientes', icon: Store, href: '/lojas' },
   { title: 'Usuários', icon: Users, href: '/usuarios' },
   { title: 'Config. Propostas', icon: Briefcase, href: '/config-propostas' },
   { title: 'Status', icon: Tag, href: '/status' },
