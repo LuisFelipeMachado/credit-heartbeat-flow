@@ -61,7 +61,7 @@ export const mockFiliais: Filial[] = [
   {
     id: 'f1',
     loja_id: '1',
-    nome: 'Filial Paulista',
+    nome: 'Loja Paulista',
     codigo: 'CTR-01',
     endereco: 'Av. Paulista, 1000',
     cidade: 'São Paulo',
@@ -74,7 +74,7 @@ export const mockFiliais: Filial[] = [
   {
     id: 'f2',
     loja_id: '1',
-    nome: 'Filial Augusta',
+    nome: 'Loja Augusta',
     codigo: 'CTR-02',
     endereco: 'Rua Augusta, 500',
     cidade: 'São Paulo',
@@ -87,7 +87,7 @@ export const mockFiliais: Filial[] = [
   {
     id: 'f3',
     loja_id: '2',
-    nome: 'Filial Pinheiros Centro',
+    nome: 'Loja Pinheiros Centro',
     codigo: 'PIN-01',
     endereco: 'Rua dos Pinheiros, 500',
     cidade: 'São Paulo',
@@ -100,7 +100,7 @@ export const mockFiliais: Filial[] = [
   {
     id: 'f4',
     loja_id: '3',
-    nome: 'Filial Campinas Norte',
+    nome: 'Loja Campinas Norte',
     codigo: 'CPS-01',
     endereco: 'Av. Norte Sul, 200',
     cidade: 'Campinas',
