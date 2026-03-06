@@ -40,7 +40,7 @@ const mainMenuItems = [
   { title: 'Dashboard', icon: LayoutDashboard, href: '/dashboard' },
   { title: 'Propostas', icon: FileText, href: '/propostas' },
   { title: 'Análise de Crédito', icon: Search, href: '/analises' },
-  { title: 'Autorizar', icon: Shield, href: '/autorizar' },
+  { title: 'Autorização', icon: Shield, href: '/autorizacao' },
   { title: 'Relatórios', icon: BarChart3, href: '/relatorios' },
 ];
 

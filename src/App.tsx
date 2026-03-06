@@ -39,7 +39,7 @@ const App = () => (
             <Route path="/config-propostas" element={<ConfigPropostas />} />
             <Route path="/status" element={<Status />} />
             <Route path="/analises" element={<AnaliseCredito />} />
-            <Route path="/autorizar" element={<Operacoes />} />
+            <Route path="/autorizacao" element={<Autorizacao />} />
             <Route path="/relatorios" element={<Relatorios />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
