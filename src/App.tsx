@@ -11,7 +11,8 @@ import AnaliseCredito from "./pages/AnaliseCredito";
 import Lojas from "./pages/Lojas";
 import UsuariosPage from "./pages/Usuarios";
 import ConfigPropostas from "./pages/ConfigPropostas";
-import { Status, Operacoes } from "./pages/PlaceholderPages";
+import { Status } from "./pages/PlaceholderPages";
+import Autorizacao from "./pages/Autorizacao";
 import Relatorios from "./pages/Relatorios";
 import PropostaNova from "./pages/PropostaNova";
 import PropostaDetalhe from "./pages/PropostaDetalhe";
@@ -38,7 +39,7 @@ const App = () => (
             <Route path="/config-propostas" element={<ConfigPropostas />} />
             <Route path="/status" element={<Status />} />
             <Route path="/analises" element={<AnaliseCredito />} />
-            <Route path="/autorizar" element={<Operacoes />} />
+            <Route path="/autorizacao" element={<Autorizacao />} />
             <Route path="/relatorios" element={<Relatorios />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
