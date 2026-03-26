@@ -31,6 +31,7 @@ import {
   Shield,
   Tag,
   ChevronDown,
+  RefreshCw,
   LogOut,
   Landmark,
 } from 'lucide-react';
@@ -41,6 +42,7 @@ const mainMenuItems = [
   { title: 'Propostas', icon: FileText, href: '/propostas' },
   { title: 'Análise de Crédito', icon: Search, href: '/analises' },
   { title: 'Autorização', icon: Shield, href: '/autorizacao' },
+  { title: 'Renegociação', icon: RefreshCw, href: '/renegociacao' },
   { title: 'Relatórios', icon: BarChart3, href: '/relatorios' },
 ];
 
