@@ -14,6 +14,7 @@ import ConfigPropostas from "./pages/ConfigPropostas";
 import { Status } from "./pages/PlaceholderPages";
 import Autorizacao from "./pages/Autorizacao";
 import Relatorios from "./pages/Relatorios";
+import Renegociacao from "./pages/Renegociacao";
 import PropostaNova from "./pages/PropostaNova";
 import PropostaDetalhe from "./pages/PropostaDetalhe";
 import NotFound from "./pages/NotFound";
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="/status" element={<Status />} />
             <Route path="/analises" element={<AnaliseCredito />} />
             <Route path="/autorizacao" element={<Autorizacao />} />
+            <Route path="/renegociacao" element={<Renegociacao />} />
             <Route path="/relatorios" element={<Relatorios />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

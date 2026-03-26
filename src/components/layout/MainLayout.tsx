@@ -14,6 +14,7 @@ const pageTitles: Record<string, string> = {
   '/propostas/nova': 'Nova Proposta',
   '/analises': 'Análise de Crédito',
   '/autorizacao': 'Autorização',
+  '/renegociacao': 'Renegociação',
   '/relatorios': 'Relatórios',
   '/lojas': 'Clientes',
   '/usuarios': 'Usuários',
