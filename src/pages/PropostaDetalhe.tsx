@@ -3,13 +3,16 @@ import { MainLayout } from '@/components/layout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { StatusBadge } from '@/components/ui/status-badge';
-import { ArrowLeft, User, Building2, Calculator, UserCircle, FileText, DollarSign, CalendarDays, Hash } from 'lucide-react';
+import { ArrowLeft, User, Building2, Calculator, UserCircle, FileText, DollarSign, CalendarDays, Hash, FolderOpen, Wallet, ShieldCheck } from 'lucide-react';
 import { getEnrichedPropostas } from '@/data/mockData';
 import { DadosEssenciaisTab } from '@/components/proposta-detalhe/DadosEssenciaisTab';
 import { VinculoEmpregaticioTab } from '@/components/proposta-detalhe/VinculoEmpregaticioTab';
 import { SimulacaoTab } from '@/components/proposta-detalhe/SimulacaoTab';
 import { DadosAdicionaisTab } from '@/components/proposta-detalhe/DadosAdicionaisTab';
 import { ContratoTab } from '@/components/proposta-detalhe/ContratoTab';
+import { DocumentosTab } from '@/components/proposta-detalhe/DocumentosTab';
+import { FluxoPagamentosTab } from '@/components/proposta-detalhe/FluxoPagamentosTab';
+import { AnaliseCreditoTab } from '@/components/proposta-detalhe/AnaliseCreditoTab';
 
 export default function PropostaDetalhe() {
   const { id } = useParams();
