@@ -3,13 +3,16 @@ import { MainLayout } from '@/components/layout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { StatusBadge } from '@/components/ui/status-badge';
-import { ArrowLeft, User, Building2, Calculator, UserCircle, FileText, DollarSign, CalendarDays, Hash } from 'lucide-react';
+import { ArrowLeft, User, Building2, Calculator, UserCircle, FileText, DollarSign, CalendarDays, Hash, FolderOpen, Wallet, ShieldCheck } from 'lucide-react';
 import { getEnrichedPropostas } from '@/data/mockData';
 import { DadosEssenciaisTab } from '@/components/proposta-detalhe/DadosEssenciaisTab';
 import { VinculoEmpregaticioTab } from '@/components/proposta-detalhe/VinculoEmpregaticioTab';
 import { SimulacaoTab } from '@/components/proposta-detalhe/SimulacaoTab';
 import { DadosAdicionaisTab } from '@/components/proposta-detalhe/DadosAdicionaisTab';
 import { ContratoTab } from '@/components/proposta-detalhe/ContratoTab';
+import { DocumentosTab } from '@/components/proposta-detalhe/DocumentosTab';
+import { FluxoPagamentosTab } from '@/components/proposta-detalhe/FluxoPagamentosTab';
+import { AnaliseCreditoTab } from '@/components/proposta-detalhe/AnaliseCreditoTab';
 
 export default function PropostaDetalhe() {
   const { id } = useParams();
@@ -117,6 +120,18 @@ export default function PropostaDetalhe() {
               <FileText className="h-4 w-4" />
               <span className="hidden sm:inline text-sm">Contrato</span>
             </TabsTrigger>
+            <TabsTrigger value="documentos" className="gap-2 rounded-lg data-[state=active]:bg-accent data-[state=active]:text-accent-foreground px-4 py-2.5">
+              <FolderOpen className="h-4 w-4" />
+              <span className="hidden sm:inline text-sm">Documentos</span>
+            </TabsTrigger>
+            <TabsTrigger value="fluxo-pagamentos" className="gap-2 rounded-lg data-[state=active]:bg-accent data-[state=active]:text-accent-foreground px-4 py-2.5">
+              <Wallet className="h-4 w-4" />
+              <span className="hidden sm:inline text-sm">Fluxo de Pagamentos</span>
+            </TabsTrigger>
+            <TabsTrigger value="analise-credito" className="gap-2 rounded-lg data-[state=active]:bg-accent data-[state=active]:text-accent-foreground px-4 py-2.5">
+              <ShieldCheck className="h-4 w-4" />
+              <span className="hidden sm:inline text-sm">Análise de Crédito</span>
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="dados-essenciais">
@@ -133,6 +148,15 @@ export default function PropostaDetalhe() {
           </TabsContent>
           <TabsContent value="contrato">
             <ContratoTab proposta={proposta} />
+          </TabsContent>
+          <TabsContent value="documentos">
+            <DocumentosTab proposta={proposta} />
+          </TabsContent>
+          <TabsContent value="fluxo-pagamentos">
+            <FluxoPagamentosTab proposta={proposta} />
+          </TabsContent>
+          <TabsContent value="analise-credito">
+            <AnaliseCreditoTab proposta={proposta} />
           </TabsContent>
         </Tabs>
       </div>
