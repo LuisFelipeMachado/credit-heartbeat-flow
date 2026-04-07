@@ -10,12 +10,14 @@ interface DocumentosTabProps {
 }
 
 const mockDocumentos = [
-  { id: '1', nome: 'RG / CNH', tipo: 'identidade', status: 'aprovado', dataEnvio: '2024-03-10', tamanho: '2.4 MB' },
-  { id: '2', nome: 'Comprovante de Renda', tipo: 'renda', status: 'pendente', dataEnvio: null, tamanho: null },
-  { id: '3', nome: 'Comprovante de Residência', tipo: 'residencia', status: 'aprovado', dataEnvio: '2024-03-11', tamanho: '1.1 MB' },
-  { id: '4', nome: 'Holerite / Contracheque', tipo: 'renda', status: 'em_analise', dataEnvio: '2024-03-12', tamanho: '850 KB' },
-  { id: '5', nome: 'Selfie com Documento', tipo: 'selfie', status: 'pendente', dataEnvio: null, tamanho: null },
-  { id: '6', nome: 'Extrato Bancário (3 meses)', tipo: 'bancario', status: 'reprovado', dataEnvio: '2024-03-09', tamanho: '3.2 MB' },
+  { id: '1', nome: 'Contrato Assinado', tipo: 'contrato', status: 'aprovado', dataEnvio: '2024-03-10', tamanho: '1.8 MB' },
+  { id: '2', nome: 'Comprovante de Pagamento', tipo: 'pagamento', status: 'aprovado', dataEnvio: '2024-03-12', tamanho: '520 KB' },
+  { id: '3', nome: 'RG / CNH', tipo: 'identidade', status: 'aprovado', dataEnvio: '2024-03-10', tamanho: '2.4 MB' },
+  { id: '4', nome: 'Comprovante de Renda', tipo: 'renda', status: 'pendente', dataEnvio: null, tamanho: null },
+  { id: '5', nome: 'Comprovante de Residência', tipo: 'residencia', status: 'aprovado', dataEnvio: '2024-03-11', tamanho: '1.1 MB' },
+  { id: '6', nome: 'Holerite / Contracheque', tipo: 'renda', status: 'em_analise', dataEnvio: '2024-03-12', tamanho: '850 KB' },
+  { id: '7', nome: 'Selfie com Documento', tipo: 'selfie', status: 'pendente', dataEnvio: null, tamanho: null },
+  { id: '8', nome: 'Extrato Bancário (3 meses)', tipo: 'bancario', status: 'reprovado', dataEnvio: '2024-03-09', tamanho: '3.2 MB' },
 ];
 
 const statusConfig: Record<string, { label: string; variant: 'default' | 'secondary' | 'destructive' | 'outline'; icon: React.ReactNode }> = {
@@ -26,6 +28,8 @@ const statusConfig: Record<string, { label: string; variant: 'default' | 'second
 };
 
 const tipoIcon: Record<string, React.ReactNode> = {
+  contrato: <FileText className="h-5 w-5 text-primary" />,
+  pagamento: <FileText className="h-5 w-5 text-primary" />,
   identidade: <File className="h-5 w-5 text-primary" />,
   renda: <FileText className="h-5 w-5 text-primary" />,
   residencia: <FileText className="h-5 w-5 text-primary" />,
