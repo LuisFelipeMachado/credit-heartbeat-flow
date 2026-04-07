@@ -4,3 +4,6 @@ export { VinculoEmpregaticioTab } from './VinculoEmpregaticioTab';
 export { SimulacaoTab } from './SimulacaoTab';
 export { DadosAdicionaisTab } from './DadosAdicionaisTab';
 export { ContratoTab } from './ContratoTab';
+export { DocumentosTab } from './DocumentosTab';
+export { FluxoPagamentosTab } from './FluxoPagamentosTab';
+export { AnaliseCreditoTab } from './AnaliseCreditoTab';

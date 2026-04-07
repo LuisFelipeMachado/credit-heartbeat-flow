@@ -149,6 +149,15 @@ export default function PropostaDetalhe() {
           <TabsContent value="contrato">
             <ContratoTab proposta={proposta} />
           </TabsContent>
+          <TabsContent value="documentos">
+            <DocumentosTab proposta={proposta} />
+          </TabsContent>
+          <TabsContent value="fluxo-pagamentos">
+            <FluxoPagamentosTab proposta={proposta} />
+          </TabsContent>
+          <TabsContent value="analise-credito">
+            <AnaliseCreditoTab proposta={proposta} />
+          </TabsContent>
         </Tabs>
       </div>
     </MainLayout>
