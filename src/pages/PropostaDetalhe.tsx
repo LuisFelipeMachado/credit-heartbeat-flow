@@ -120,6 +120,18 @@ export default function PropostaDetalhe() {
               <FileText className="h-4 w-4" />
               <span className="hidden sm:inline text-sm">Contrato</span>
             </TabsTrigger>
+            <TabsTrigger value="documentos" className="gap-2 rounded-lg data-[state=active]:bg-accent data-[state=active]:text-accent-foreground px-4 py-2.5">
+              <FolderOpen className="h-4 w-4" />
+              <span className="hidden sm:inline text-sm">Documentos</span>
+            </TabsTrigger>
+            <TabsTrigger value="fluxo-pagamentos" className="gap-2 rounded-lg data-[state=active]:bg-accent data-[state=active]:text-accent-foreground px-4 py-2.5">
+              <Wallet className="h-4 w-4" />
+              <span className="hidden sm:inline text-sm">Fluxo de Pagamentos</span>
+            </TabsTrigger>
+            <TabsTrigger value="analise-credito" className="gap-2 rounded-lg data-[state=active]:bg-accent data-[state=active]:text-accent-foreground px-4 py-2.5">
+              <ShieldCheck className="h-4 w-4" />
+              <span className="hidden sm:inline text-sm">Análise de Crédito</span>
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="dados-essenciais">
