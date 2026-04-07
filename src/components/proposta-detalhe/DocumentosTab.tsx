@@ -28,6 +28,8 @@ const statusConfig: Record<string, { label: string; variant: 'default' | 'second
 };
 
 const tipoIcon: Record<string, React.ReactNode> = {
+  contrato: <FileText className="h-5 w-5 text-primary" />,
+  pagamento: <FileText className="h-5 w-5 text-primary" />,
   identidade: <File className="h-5 w-5 text-primary" />,
   renda: <FileText className="h-5 w-5 text-primary" />,
   residencia: <FileText className="h-5 w-5 text-primary" />,
